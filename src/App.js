@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function App() {
   return (
-    <div>
+    <div style={{ textAlign: 'center' ,backgroundColor:"red"}}>
       appaskjdnkla
     </div>
   )

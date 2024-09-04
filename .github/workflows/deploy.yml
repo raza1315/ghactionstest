@@ -7,28 +7,28 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # Ubuntu Linux environment ke liye
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
 
     steps:
     - name: Checkout the code
-      uses: actions/checkout@v3  # Latest version of checkout action
+      uses: actions/checkout@v3  # Latest version of checkout action compatible with Node.js 20
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'  # Latest Node.js version
+        node-version: '20'  # Set Node.js version to 20
 
     - name: Install dependencies
-      run: npm install  # Project ki dependencies install karega
+      run: npm install  # Install project dependencies
 
     - name: Build the project
-      run: npm run build  # React app ko build karega
+      run: npm run build  # Build the project (e.g., React app)
 
     - name: Set up Git config
       run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        
+        git config --global user.name 'Your CI/CD Bot'
+        git config --global user.email 'ci-bot@yourdomain.com'
+
     - name: Commit and push changes
       run: |
         git add -A

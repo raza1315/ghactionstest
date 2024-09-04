@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Deployment ke liye main branch use karein
+      - main  # Trigger workflow on push to main branch
 
 jobs:
   build-and-deploy:
@@ -24,9 +24,15 @@ jobs:
     - name: Build the project
       run: npm run build  # React app ko build karega
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4  # Latest version of gh-pages action
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub Pages ke liye auth token
-        publish_dir: ./build  # Build output directory
-        publish_branch: main  # Branch name for deployment (adjust if needed)
+    - name: Set up Git config
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        
+    - name: Commit and push changes
+      run: |
+        git add -A
+        git commit -m 'Deploy to GitHub Pages'
+        git push origin main  # Push changes to the main branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub Actions token for authentication

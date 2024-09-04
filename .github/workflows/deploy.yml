@@ -29,4 +29,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub Pages ke liye auth token
         publish_dir: ./build  # Build output directory
-        publish_branch: gh-pages  # Branch name for deployment (adjust if needed)
+        publish_branch: main  # Branch name for deployment (adjust if needed)

@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Jab main branch me kuch push hota hai tab ye workflow chalega
+      - main  # Deployment ke liye main branch use karein
 
 jobs:
   build-and-deploy:
@@ -11,12 +11,12 @@ jobs:
 
     steps:
     - name: Checkout the code
-      uses: actions/checkout@v2  # Repository ka code pull karega
+      uses: actions/checkout@v3  # Latest version of checkout action
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: '16'  # Node.js version set karega (React ke liye 16 ya latest version use karein)
+        node-version: '20'  # Latest Node.js version
 
     - name: Install dependencies
       run: npm install  # Project ki dependencies install karega
@@ -25,7 +25,8 @@ jobs:
       run: npm run build  # React app ko build karega
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3  # GitHub Pages par deploy karne ke liye action
+      uses: peaceiris/actions-gh-pages@v4  # Latest version of gh-pages action
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub Pages ke liye auth token
-        publish_dir: ./build  # Ye build directory ko deploy karega
+        publish_dir: ./build  # Build output directory
+        publish_branch: gh-pages  # Branch name for deployment (adjust if needed)

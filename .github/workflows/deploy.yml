@@ -1,0 +1,31 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Jab main branch me kuch push hota hai tab ye workflow chalega
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # Ubuntu Linux environment ke liye
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2  # Repository ka code pull karega
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Node.js version set karega (React ke liye 16 ya latest version use karein)
+
+    - name: Install dependencies
+      run: npm install  # Project ki dependencies install karega
+
+    - name: Build the project
+      run: npm run build  # React app ko build karega
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3  # GitHub Pages par deploy karne ke liye action
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub Pages ke liye auth token
+        publish_dir: ./build  # Ye build directory ko deploy karega
